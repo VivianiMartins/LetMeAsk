@@ -17,3 +17,15 @@ button,
 textarea {
 	font: 400 1rem $primary-font;
 }
+
+@media (max-width: 1024px) {
+  html{
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 768px) {
+  html{
+    font-size: 87.5%;
+  }
+}

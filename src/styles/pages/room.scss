@@ -2,8 +2,8 @@
 
 #page-room{
   header{
-    padding: 24px;
-    border-bottom: 1px solid #e2e2e2;
+    padding: 1.5rem;
+    border-bottom: 1px solid $header-border;
 
     .content{
       max-width: 1120px;
@@ -13,12 +13,12 @@
       align-items:center;
 
       > img {
-        max-height: 45px;
+        max-height: 2.813rem;
       }
 
       > div {
         display: flex;
-        gap: 16px;
+        gap: 1rem;
 
         button{
           height: 40px;
@@ -28,25 +28,25 @@
   }
 
   main{
-    max-width: 800px;
+    max-width: 50rem;
     margin: 0 auto;
 
     .room-title{
-      margin: 32px 0 24px;
+      margin: 2rem 0 1.5rem;
       display: flex;
       align-items:center;
 
       h1{
         font-family: $secondary-font;
-        font-size: 24px;
+        font-size: 1.5rem;
         color: $dark-gray;
       }
 
       span{
-        margin-left: 16px;
-        background: $light-pink;
+        margin-left: 1rem;
+        background: $green;
         border-radius: 9999px;
-        padding: 8px 16px;
+        padding: 0.5rem 1rem;
         color: $white;
         font-weight: 500;
         font-size: 14px;
@@ -57,32 +57,32 @@
       textarea{
         width: 100%;
         border: 0;
-        padding: 16px;
+        padding: 1rem;
         border-radius: 8px;
         background: $light-white;
         box-shadow: 0 2px 12px $shadow;
         resize: vertical;
-        min-height: 130px;
+        min-height: 8.125rem;
       }
 
       .form-footer{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 16px;
+        margin-top: 1rem;
 
         .user-info{
           display: flex;
           align-items: center;
 
           img{
-            width: 32px;
-            height: 32px;
+            width: 2rem;
+            height: 2rem;
             border-radius: 50%;
           }
 
           span{
-            margin-left: 8px;
+            margin-left: 0.5rem;
             color: $dark-gray;
             font-weight: 500;
             font-size: 14px;
@@ -110,7 +110,45 @@
     }
 
     .question-list{
-      margin-top: 32px;
+      margin-top: 2rem;
     }
   }
+
+  @media (max-width: 768px) {
+    main{
+      max-width: 80%;
+      padding-top: 1rem;
+			padding-bottom: 1rem;
+      
+      .room-title{
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    header .content{
+      flex-direction: column;
+      > img{
+        max-height: 50%;
+      }
+      >div{
+        flex-direction: column;
+      }
+    }
+    main{
+      form{
+        textarea{
+          overflow: scroll;
+        }
+        .form-footer{
+          flex-direction: column;
+          gap: 0.5rem;
+        }  
+      }
+    }
+  }
+  
 }

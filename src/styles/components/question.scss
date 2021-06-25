@@ -4,10 +4,35 @@
   background: $light-white;
   border-radius: 8px;
   box-shadow: 0 2px 12px $shadow;
-  padding: 24px;
+  padding: 1.5rem;
 
   & + .question{
-    margin-top: 8px;
+    margin-top: 0.5rem;
+  }
+
+  &.highlighted{
+    background: #e8e0ff;
+    border: 1px solid $purple;
+    
+    footer .user-info span{
+      color: $dark-gray;
+    }
+  }
+
+  &.answered{
+    background: #dcf1e3;
+
+    p{
+      color: $light-gray;
+    }
+
+    footer .user-info span{
+      color: $light-gray;
+    }
+
+    footer .user-info img{
+      opacity: 0.6;
+    }
   }
 
   p{
@@ -18,23 +43,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 1.5rem;
 
     .user-info{
       display: flex;
       align-items: center;
 
       img{
-        width: 32px;
-        height: 32px;
+        width: 2rem;
+        height: 2rem;
         border-radius: 50%;
       }
 
       span{
-        margin-left: 8px;
+        margin-left: 0.5rem;
         color: $medium-gray;
         font-size: 14px;
       }
+    }
+
+    > div{
+      display: flex;
+      gap: 1rem;
     }
 
     button{
@@ -46,7 +76,7 @@
         display: flex;
         align-items: flex-end;
         color: $medium-gray;
-        gap: 8px;
+        gap: 0.5rem;
         transition: filter 0.2s;
 
         &.liked{
@@ -61,6 +91,12 @@
           filter:brightness(0.7);
         }
       }
+    }
+  }
+
+  @media (max-width:480px){
+    .user-info {
+      flex-direction: column;
     }
   }
 }
