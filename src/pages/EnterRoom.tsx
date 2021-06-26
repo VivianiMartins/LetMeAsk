@@ -1,33 +1,37 @@
 import { FormEvent, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
 import { database } from '../services/firebase';
-import { useAuth } from '../hooks/useAuth';
 
 import '../styles/pages/auth.scss';
 
-export function NewRoom(){
-  const { user } = useAuth();
+export function EnterRoom(){
   const history = useHistory();
-  const [ newRoom, setNewRoom ] = useState('');
+  const [ roomCode, setRoomCode ] = useState('');
 
-  async function handleCreateRoom(event: FormEvent) {
+
+  async function handleJoinRoom(event: FormEvent) {
     event.preventDefault();
 
-    if (newRoom.trim() === '') {
+    if (roomCode.trim() === ''){
       return;
     }
 
-    const roomRef = database.ref('rooms');
+    const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
-    const firebaseRoom = await roomRef.push({
-      title: newRoom,
-      authorId: user?.id,
-    });
+    if(!roomRef.exists()) {
+      alert('Sala não existente.');
+      return;
+    }
 
-    history.push(`/rooms/${firebaseRoom.key}`);
+    if(roomRef.val().endedAt) {
+      alert('Sala já encerrada.');
+      return;
+    }
+
+    history.push(`rooms/${roomCode}`);
   }
 
   return(
@@ -40,20 +44,17 @@ export function NewRoom(){
       <main>
         <div className="main-content">
           <img src={logoImg} alt="LetMeAsk" />
-          <h2>Crie uma nova sala</h2>
-          <form onSubmit={handleCreateRoom}>
+          <h2>Insira o código para entrar na sala</h2>
+          <form onSubmit={handleJoinRoom}>
             <input type="text"
-              placeholder="Digite o nome da sala"
-              onChange={event => setNewRoom(event.target.value)}
-              value={newRoom}
+            placeholder="Digite o código da sala"
+            onChange={event => setRoomCode(event.target.value)}
+            value={roomCode}
             />
             <Button type="submit">
-              Criar sala
+              Entrar na sala
             </Button>
           </form>
-          <p>
-            Quer entrar em uma sala existente? <Link to="/enterrooms">clique aqui</Link>
-          </p>
         </div>
       </main>
     </div>

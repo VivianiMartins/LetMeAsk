@@ -23,6 +23,32 @@
         button{
           height: 40px;
         }
+
+        .admin-button{
+          height: 40px;
+          border-radius: 8px;
+          font-weight: 500;
+          background: $white;
+          border: 1px solid $dark-green;
+          color: $dark-green;
+          text-decoration:none;
+          padding: 0 2rem;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:not(:disabled):hover {
+            filter: brightness(0.9);
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
       }
     }
   }

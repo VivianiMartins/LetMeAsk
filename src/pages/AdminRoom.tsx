@@ -23,6 +23,10 @@ export function AdminRoom() {
   const roomId = params.id;
   const { questions, title } = useRoom(roomId);
 
+  function handleBackRoom() {
+    history.goBack();
+  }
+
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
       endedAt: new Date(),
@@ -57,6 +61,7 @@ export function AdminRoom() {
           <div>
             <RoomCode code={roomId} />
             <Button isOutlined onClick={handleEndRoom} >Encerrar sala</Button>
+            <Button className="admin-button" onClick={handleBackRoom} >Voltar para sala</Button>
           </div>
         </div>
       </header>
